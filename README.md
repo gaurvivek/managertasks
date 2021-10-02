@@ -57,5 +57,5 @@ highcharts, react-notifications, classnames
 ![Dashboard](./public/dashboard.png "Title")
 # Projects and manage project
 ![Dashboard](./public/manage_projects.png "Title")
-# Tassk and manage tasks
+# Tasks and manage tasks
 ![Dashboard](./public/manage_tasks.png "Title")
