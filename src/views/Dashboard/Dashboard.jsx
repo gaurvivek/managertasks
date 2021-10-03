@@ -111,9 +111,9 @@ class DashboardClass extends React.Component {
         highTasks++;
       }
     })
-    pieChartData.push({ name: "Low", y: lowTasks * 100 / originalTaskListArr.length });
-    pieChartData.push({ name: "Medium", y: mediumTasks * 100 / originalTaskListArr.length });
-    pieChartData.push({ name: "High", y: highTasks * 100 / originalTaskListArr.length });
+    pieChartData.push({ name: "Low", y: lowTasks * 100 / originalTaskListArr.length, count: lowTasks });
+    pieChartData.push({ name: "Medium", y: mediumTasks * 100 / originalTaskListArr.length, count: mediumTasks });
+    pieChartData.push({ name: "High", y: highTasks * 100 / originalTaskListArr.length, count: highTasks });
     let priorityChartOptions = {
       chart: {
         plotBackgroundColor: null,
@@ -125,7 +125,20 @@ class DashboardClass extends React.Component {
         text: 'Tasks Priorities Chart'
       },
       tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        useHTML: true,
+        formatter: function () {
+          return `
+            <div>
+              <b>${this.key}</b>
+              <p>
+                <ul style="color:${this.color}; list-style-type:upper-roman;">
+                  <li style="font-size: 14px;margin-left: 15px;list-style-type: circle;">
+                    <span style="color: black">Tasks: <b>${this.point.count}</b><span>
+                  </li>
+                </ul>
+              </p>
+            </div>`;
+        }
       },
       colors: ['#32b462', '#b7cf1f', '#c2303f'],
       accessibility: {
@@ -167,9 +180,9 @@ class DashboardClass extends React.Component {
         doneTasks++;
       }
     })
-    pieChartData.push({ name: "New", y: newTasks * 100 / originalTaskListArr.length });
-    pieChartData.push({ name: "In Progress", y: progressTasks * 100 / originalTaskListArr.length });
-    pieChartData.push({ name: "Done", y: doneTasks * 100 / originalTaskListArr.length });
+    pieChartData.push({ name: "New", y: newTasks * 100 / originalTaskListArr.length, count: newTasks });
+    pieChartData.push({ name: "In Progress", y: progressTasks * 100 / originalTaskListArr.length, count: progressTasks });
+    pieChartData.push({ name: "Done", y: doneTasks * 100 / originalTaskListArr.length, count: doneTasks });
     let statusChartOptions = {
       chart: {
         plotBackgroundColor: null,
@@ -181,7 +194,20 @@ class DashboardClass extends React.Component {
         text: 'Tasks Status Chart'
       },
       tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        useHTML: true,
+        formatter: function () {
+          return `
+            <div>
+              <b>${this.key}</b>
+              <p>
+                <ul style="color:${this.color}; list-style-type:upper-roman;">
+                  <li style="font-size: 14px;margin-left: 15px;list-style-type: circle;">
+                    <span style="color: black">Tasks: <b>${this.point.count}</b><span>
+                  </li>
+                </ul>
+              </p>
+            </div>`;
+        }
       },
       colors: ['#f55c1b', '#1fb8cf', '#32b473'],
       accessibility: {
